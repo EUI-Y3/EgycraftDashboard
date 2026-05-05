@@ -1,0 +1,48 @@
+#link{
+    text-decoration: none;
+    position: relative;
+    padding: 10px 0;
+    transition: all 200ms ease-in-out;
+}
+.asideNav:hover img{
+    width: 24px;
+}
+.active1, .active2, .active3{
+    opacity: 0.5;
+}
+
+.asideNav{
+    font-family: "Noto Sans Arabic";
+    display: flex;
+    height: 44px;
+    width: 100%;
+    padding: 0 22px;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    align-self: stretch;
+    border-radius: 12px;
+}
+.asideNav #link{
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    text-decoration: none;
+    align-self: stretch;
+    align-items: center;
+}
+.asideNav img{
+    width: 20px;
+    height: auto;
+    padding: 2px;
+}
+.asideNav:hover {
+    /* border-radius: 10px; */
+border: 0.727px solid #0B7F7B;
+background: rgba(24, 70, 111, 0.31);
+}
+.asideNav.active {
+    border-radius: 10px;
+border: 0.727px solid #0B7F7B;
+background: rgba(24, 70, 111, 0.31);
+}

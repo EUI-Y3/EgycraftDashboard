@@ -1,0 +1,23 @@
+<svg width="61" height="66" viewBox="0 0 61 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_d_31_38)">
+<rect width="61" height="61" rx="30.5" fill="#E2209E" shape-rendering="crispEdges"/>
+<rect x="0.75" y="0.75" width="59.5" height="59.5" rx="29.75" stroke="black" stroke-width="1.5" shape-rendering="crispEdges"/>
+<g clip-path="url(#clip0_31_38)">
+<path d="M42.5 30.5C42.5 23.871 37.129 18.5 30.5 18.5C23.871 18.5 18.5 23.871 18.5 30.5C18.5 36.4894 22.8882 41.4539 28.625 42.3548V33.9689H25.5766V30.5H28.625V27.8561C28.625 24.8489 30.4153 23.1877 33.1574 23.1877C34.4706 23.1877 35.8439 23.4219 35.8439 23.4219V26.3735H34.3303C32.84 26.3735 32.375 27.2987 32.375 28.2476V30.5H35.7031L35.1708 33.9689H32.375V42.3548C38.1118 41.4539 42.5 36.4894 42.5 30.5Z" fill="#F4F4F4"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_31_38" x="0" y="0" width="61" height="66" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="5"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_31_38"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_31_38" result="shape"/>
+</filter>
+<clipPath id="clip0_31_38">
+<rect width="24" height="24" fill="white" transform="translate(18.5 18.5)"/>
+</clipPath>
+</defs>
+</svg>
