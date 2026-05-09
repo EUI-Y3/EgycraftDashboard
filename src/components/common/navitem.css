@@ -5,7 +5,7 @@
     transition: all 200ms ease-in-out;
 }
 .asideNav:hover img{
-    width: 24px;
+    width: 38px;
 }
 .active1, .active2, .active3{
     opacity: 0.5;
@@ -14,7 +14,7 @@
 .asideNav{
     font-family: "Noto Sans Arabic";
     display: flex;
-    height: 44px;
+    height: 50px;
     width: 100%;
     padding: 0 22px;
     justify-content: center;
@@ -22,6 +22,7 @@
     text-decoration: none;
     align-self: stretch;
     border-radius: 12px;
+    font-size: 18px;
 }
 .asideNav #link{
     display: flex;
@@ -32,7 +33,7 @@
     align-items: center;
 }
 .asideNav img{
-    width: 20px;
+    width: 32px;
     height: auto;
     padding: 2px;
 }

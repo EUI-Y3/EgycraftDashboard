@@ -26,7 +26,7 @@ const userData = [
 
 export function TicketRevenueChart() {
   return (
-    <div style={{ minWidth: "48%", padding: "16px", borderRadius: "12px", border: "1px solid #ff29d1" }} className="bg-[#1e1e1e] rounded-2xl w-full border border-[#ff29d1] shadow-md">
+    <div style={{ minWidth: "48%", padding: "16px", borderRadius: "12px", border:"3px solid #0B7F7B" }} className="bg-[#1e1e1e] rounded-2xl w-full border border-[#ff29d1] shadow-md">
       <div className="p-5">
         <Heading heading="Ticket Revenue" />
         <div className="w-full h-[400px]">
@@ -34,8 +34,8 @@ export function TicketRevenueChart() {
             <AreaChart data={revenueData}>
               <defs>
                 <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#e2209e" stopOpacity={0.8} />
-                  <stop offset="95%" stopColor="#e2209e" stopOpacity={0.1} />
+                  <stop offset="5%" stopColor="#fa5e61" stopOpacity={0.8} />
+                  <stop offset="95%" stopColor="#fa5e61" stopOpacity={0.1} />
                 </linearGradient>
               </defs>
 
@@ -55,7 +55,7 @@ export function TicketRevenueChart() {
               <Tooltip
                 contentStyle={{
                   backgroundColor: "#1e1e1e",
-                  border: "1px solid #e2209e",
+                  border: "1px solid #fa5e61",
                   borderRadius: "8px",
                   color: "#fff",
                 }}
@@ -64,7 +64,7 @@ export function TicketRevenueChart() {
               <Area
                 type="monotone"
                 dataKey="revenue"
-                stroke="#e2209e"
+                stroke="#fa5e61"
                 strokeWidth={2}
                 fill="url(#colorRevenue)"
               />
@@ -78,7 +78,7 @@ export function TicketRevenueChart() {
 
 export function UserGrowthChart() {
   return (
-    <div style={{ minWidth: "48%", padding: "16px", borderRadius: "12px", border: "1px solid #ff29d1" }} className="bg-[#1e1e1e] rounded-2xl w-full border border-[#ff29d1] shadow-md">
+    <div style={{ minWidth: "48%", padding: "16px", borderRadius: "12px", border: "3px solid #0B7F7B" }} className="bg-[#1e1e1e] rounded-2xl w-full border border-[#ff29d1] shadow-md">
       <div className="p-5">
         <Heading heading="User Growth" />
         <div className="w-full h-[400px]">
@@ -98,7 +98,7 @@ export function UserGrowthChart() {
               <Tooltip
                 contentStyle={{
                   backgroundColor: "#1e1e1e",
-                  border: "1px solid #e2209e",
+                  border: "1px solid #fa5e61",
                   borderRadius: "8px",
                   color: "#fff",
                 }}
@@ -107,7 +107,7 @@ export function UserGrowthChart() {
               <Line
                 type="monotone"
                 dataKey="users"
-                stroke="#e2209e"
+                stroke="#fa5e61"
                 strokeWidth={3}
                 dot={{ r: 4 }}
                 activeDot={{ r: 6 }}

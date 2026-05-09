@@ -9,17 +9,14 @@ const Aside = () => {
     <div className="aside_container">
 
   <aside>
-    <nav>
-      <ul id="sidebar" className="main_nav">
-        {/* LOGO */}
-        <li className="logo">
+    <li className="logo">
           <Link to="/"> 
             <img src={logo} alt="" />
           </Link>
         </li>
-        {/* 1 */} 
+    <nav role="navigation">
+      <ul id="sidebar" className="main_nav">
          <Navigations />
-
       </ul>
     </nav>
   </aside>

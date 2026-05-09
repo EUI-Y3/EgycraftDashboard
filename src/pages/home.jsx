@@ -12,8 +12,8 @@ const Home = () => {
     return ( <>
     <div className='body2'>
     <Aside />
-        <main className='main2'>
             <Navbar />
+        <main className='main2'>
            <section className='mainCont'>
              <TitleBlock
                 class="title1"
