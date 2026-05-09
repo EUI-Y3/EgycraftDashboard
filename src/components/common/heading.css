@@ -1,7 +1,7 @@
 .heading{
     text-align: left;
     align-self: flex-start;
-    margin: 22px;
+    margin: 22px 0 22px 0;
     font-weight: 400;
     letter-spacing: -1px;
 }

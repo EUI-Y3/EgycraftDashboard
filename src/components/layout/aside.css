@@ -30,7 +30,7 @@ background: #FFF9F0;
     height: 100%;
     position: fixed;
     overflow: hidden;
-    z-index: 999999999999999;
+    z-index: 9999;
 }
 .main_nav{
     display: flex;

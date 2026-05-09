@@ -126,22 +126,26 @@ background: #FFF9F0;
     height: 20px;
 }
 .form1{
-    display: flex;
+        display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     width: 80%;
     gap: 12px;
     padding: 44px;
     position: relative;
-    background: rgb(44 39 39);
+    background:rgb(237 232 222);
 }
-.form1 input{
-    width: calc(50% - 5px);
+.form1 input {
+    width: calc(50% - 12px);
+    /* width: 100%; */
+    /* max-width: 400px; */
+    min-width: 234.761px;
 }
 .inputFlex{
     display: flex;
     width: 100%;
     flex-direction: row;
+    gap: 12px;
     flex-wrap: wrap;
 }
 .selection{
@@ -152,7 +156,7 @@ background: #FFF9F0;
     border: 1px solid #F1DFD1;
 }
 .selection:active{
-    border: 1px solid #850257;
+    border: 1px solid #0b7f7b;
 }
 .chipsFlex{
     width: 100%;
@@ -161,4 +165,12 @@ background: #FFF9F0;
 }
 .filter{
     width: min-content;
+}
+@media (max-width:800px) {
+    .form1 input {
+    width: 100%;
+    /* width: 100%; */
+    /* max-width: 400px; */
+    min-width: 234.761px;
+}
 }
