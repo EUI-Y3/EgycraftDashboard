@@ -17,13 +17,13 @@ import icon7 from './../../assets/category.svg';
 
 const Navigations = () => {
     return ( <>
-    <Navitem  icon={icon1} title="Dashboard" link="/dashboard" style1="asideNav"/>
-         <Navitem icon={icon4} title="Content Management" link="/header" style1="asideNav"/>
-         <Navitem icon={icon5} title="Booths" link="/sections" style1="asideNav"/>
-         <Navitem icon={icon3} title="Event" link="/events" style1="asideNav"/>
-         <Navitem icon={icon7} title="Categories" link="/categories" style1="asideNav"/>
-         <Navitem icon={icon4} title="Tickets" link="/tickets" style1="asideNav"/>
-         <Navitem icon={icon6} title="Vendors" link="/feedback" style1="asideNav"/>
+    <Navitem icon={icon1} title="Dashboard"  link="/dashboard" style1="asideNav" index={1} />
+            <Navitem icon={icon2} title="Web Content" link="/header"    style1="asideNav" index={2} />
+            <Navitem icon={icon5} title="Booths"      link="/sections"  style1="asideNav" index={3} />
+            <Navitem icon={icon3} title="Event"       link="/events"    style1="asideNav" index={4} />
+            <Navitem icon={icon7} title="Categories"  link="/categories" style1="asideNav" index={5} />
+            <Navitem icon={icon4} title="Tickets"     link="/tickets"   style1="asideNav" index={6} />
+            <Navitem icon={icon6} title="Vendors"     link="/feedback"  style1="asideNav" index={7} />
     
     </> );
 }

@@ -6,9 +6,15 @@ const Navitem = (props) => {
     const isActive = useMatch(props.link);
     return (
         <li className={`${props.style1} ${isActive ? "active" : ""}`}>
-            <Link to={props.link} id="link">
-                <img src={props.icon} alt="" />
+             <Link
+                to={props.link}
+                id="link"
+                tabIndex={props.index}
+                aria-label={props.title}
+                aria-current={isActive ? "page" : undefined}>
+                <img src={props.icon} alt="" aria-hidden="true" />
                 {props.title}
+                
             </Link>
         </li>
     );

@@ -29,6 +29,9 @@ header ul{
     max-height: 34px;
     display: none;
 }
+.burgermenu img{
+    width: 30px;
+}
 .btnFlex{
     display: flex;
 align-items: center;
@@ -79,4 +82,8 @@ header .btnFlex{
 .profile div{
     display: none;
 }
+}
+.btnFlex7{
+    display: flex;
+    gap: 10px;
 }

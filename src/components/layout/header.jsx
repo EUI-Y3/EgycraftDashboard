@@ -35,8 +35,12 @@ const Navbar = (props) => {
                     <h5>admin</h5>
                 </div>
             </div>
-        <button className='btn3'><img src={logout} alt="" /></button>
-        <button className='btn3 burgermenu' onClick={openPopup}> <img src={burger} alt="" /></button>
+        <div className='btnFlex7'>
+            <button className='btn3'><img src={logout} alt="" /></button>
+        <a href="#main-content" aria-label='Open Menu' className='btn3' >Skip to main content</a>
+        </div>
+
+        <button aria-label='Open Menu' className='btn3 burgermenu' onClick={openPopup}> <img src={burger} alt="" /></button>
             </div>
     </header>
         

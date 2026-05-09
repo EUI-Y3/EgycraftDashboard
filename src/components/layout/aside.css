@@ -53,3 +53,8 @@ background: #FFF9F0;
     display: none;
 }
 }
+.asideNav #link:focus-visible {
+    outline: 2px solid #0B7F7B;
+    outline-offset: 3px;
+    border-radius: 8px;
+}

@@ -8,13 +8,13 @@ const Aside = () => {
     return ( <>
     <div className="aside_container">
 
-  <aside>
+  <aside aria-label="Sidebar navigation" >
     <li className="logo">
-          <Link to="/"> 
-            <img src={logo} alt="" />
+          <Link Link to="/" tabIndex={0} aria-label="Go to Login Page"> 
+            <img src={logo} alt="EgyCraft Logo" />
           </Link>
         </li>
-    <nav role="navigation">
+    <nav role="navigation" aria-label="Main navigation">
       <ul id="sidebar" className="main_nav">
          <Navigations />
       </ul>

@@ -13,19 +13,28 @@
 }
 button{
     border: none;
+    box-shadow: 0 -5.143px 0 0 rgba(0, 0, 0, 0.25) inset;
+    background: transparent;
+    background-position: top right;
+}
+button:hover{
+    box-shadow: 0 -8.143px 0 0 rgba(0, 0, 0, 0.25) inset;
 
 }
 .btn1{
     border-radius: 12px;
-    background: #DC4649;
+    background-image: url(./../../assets/btn1before1.png);
+
 }
+.btn1:hover{
+    background-image: url(./../../assets/btn1before2.png);
 
+}
 .btn2{
-        border-radius: 12px;
-
-    border: 1px solid #F4F1FF;
-    box-shadow: 0 4px 0 0 #FFF;
-    color: #F4F1FF;
+    border-radius: 12px;
+    background-size: 100% 100%;
+    /* background-position: left; */
+    background-image: url(./../../assets/btn2before2.png);
 
 }
 .btn1:hover, .btn2:hover{
@@ -41,14 +50,18 @@ button{
     gap: 16px;
     gap: 4px;
     flex-shrink: 0;
-    background: #fff9f0;
+    color: #1C1C35;
        border-radius: 12px;
+    background-image: url(./../../assets/btn2before2.png);
+
+}
+.btn1:hover, .btn2:hover, .btn3:hover{
+    background-image: url(./../../assets/btn2before.png);
 
 }
 .btn4{
         border-radius: 12px;
 
-   background: #DC4649;
     font-size: 18px;
     font-weight: 400;
     line-height: normal;

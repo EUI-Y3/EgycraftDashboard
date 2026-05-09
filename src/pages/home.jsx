@@ -42,7 +42,7 @@ const Home = () => {
             <div className='body2'>
                 <Aside />
                 <Navbar />
-                <main className='main2'>
+                <main id="main-content" className='main2'>
                     <section className='mainCont'>
                         <TitleBlock
                             class="title1"

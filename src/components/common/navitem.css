@@ -21,6 +21,7 @@
     align-items: center;
     text-decoration: none;
     align-self: stretch;
+    text-wrap: nowrap;
     border-radius: 12px;
     font-size: 18px;
 }
@@ -44,6 +45,6 @@ background: rgba(24, 70, 111, 0.31);
 }
 .asideNav.active {
     border-radius: 10px;
-border: 0.727px solid #0B7F7B;
-background: rgba(24, 70, 111, 0.31);
+    border: 0.727px solid #0B7F7B;
+    background: rgba(24, 70, 111, 0.31);
 }
