@@ -60,9 +60,12 @@ h2{
     font-weight: 700;
 }
 h3{
-    font-size: 20px;
-    font-weight: 300;
+    font-size: 24px;
+    font-weight: 400;
     text-transform: capitalize;
+}
+h5{
+    font-size: 16px;
 }
 .btnFlex{
     display: flex;
@@ -186,6 +189,7 @@ border: 1.4px solid #E2209E;
     .mainCont{
     gap: 48px;
     padding: 0 22px 0 22px;
+            margin-top: 76px;
 }
 }
 @media (max-width: 700px){

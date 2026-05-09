@@ -13,15 +13,27 @@
     background-image: url(./../../assets/wireframe.svg);
     background-attachment: fixed;
 }
+.statCardFlex{
+    display: flex;
+    gap: 12px;
+}
 .statCard button{
     position: absolute;
     right: 22px;
     top: 22px;
 }
+.statCard img{
+    width: 44px;
+    height: 44px;
+    margin-bottom: 8px;
+}
+.statCard h1{
+    line-height: 90%;
+}
 .statText{
-    color: #DC4649;
+    color: #d43033;
     font-size: 20px;
-    font-weight: 400;
+    font-weight: 520;
     justify-self: flex-end;
     align-self: flex-end;
 }
