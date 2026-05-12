@@ -9,17 +9,15 @@ import TableItem from "../common/tableitem";
 import { supabase } from "../../supabase";
 
 const Table2 = () => {
-  // STATESS
+  // STATES
   const [bookings, setBookings] = useState([]);
-
   const [searchQuery, setSearchQuery] = useState("");
-  const [filterEvent, setFilterEvent] = useState("");
 
   // GET BOOKINGS 
   const getAllBookings = async () => {
     const { data, error } = await supabase
       .from("booking")
-      .select("*, event(title)");
+      .select("*");
 
     if (error) {
       console.log(error);
@@ -33,30 +31,15 @@ const Table2 = () => {
     getAllBookings();
   }, []);
 
-  // GETEVENTS2
-  const allEvents = [
-    ...new Map(
-      bookings.map((e) => [
-        e.event_id,
-        { id: e.event_id, name: e.event?.title }
-      ])
-    ).values(),
-  ];
-
   // FILTER 
   const filteredBookings = bookings.filter((i) => {
     const query = searchQuery.toLowerCase();
 
-    const matchesSearch =
+    return (
       searchQuery === "" ||
-      i.event?.title?.toLowerCase().includes(query) ||
       i.email?.toLowerCase().includes(query) ||
-      String(i.id).includes(query);
-
-    const matchesEvent =
-      filterEvent === "" || String(i.event_id) === String(filterEvent);
-
-    return matchesSearch && matchesEvent;
+      String(i.id).includes(query)
+    );
   });
 
   // DELETE
@@ -71,8 +54,6 @@ const Table2 = () => {
 
         {/* HEADER */}
         <div className="heading_buttonflex1">
-
-          {/* SEARCH */}
           <div className="searchbar2">
             <button className="btn5" type="button">
               <img src={search} alt="search" />
@@ -84,20 +65,6 @@ const Table2 = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-
-          {/* FILTER */}
-          <select
-            className="selection filter"
-            value={filterEvent}
-            onChange={(e) => setFilterEvent(e.target.value)}
-          >
-            <option value="">All Events</option>
-            {allEvents.map((e) => (
-              <option key={e.id} value={e.id}>
-                {e.name}
-              </option>
-            ))}
-          </select>
         </div>
 
         {/* TABLE */}
@@ -107,10 +74,10 @@ const Table2 = () => {
           <div className="table1_header">
             <TableItem class="tableitem table1_item3" font="font_bold" text="Actions" />
             <TableItem class="tableitem table1_item1" font="font_bold" text="ID" />
-            <TableItem class="tableitem table1_item3" font="font_bold" text="Event Name" />
             <TableItem class="tableitem table1_item1" font="font_bold" text="No of Tickets" />
             <TableItem class="tableitem table1_item1" font="font_bold" text="Phone" />
             <TableItem class="tableitem table1_item3" font="font_bold" text="Email" />
+            <TableItem class="tableitem table1_item3" font="font_bold" text="Day" />
             <TableItem class="tableitem table1_item6" font="font_bold" text="Booked At" />
           </div>
 
@@ -122,10 +89,7 @@ const Table2 = () => {
                 {/* ACTIONS */}
                 <div className="tableitem table1_item3">
                   <div className="tableitem_img">
-                    <button
-                      onClick={() => deleteBooking(i.id)}
-                      className="btn5"
-                    >
+                    <button onClick={() => deleteBooking(i.id)} className="btn5">
                       <img src={delete1} alt="delete" />
                     </button>
                   </div>
@@ -134,21 +98,18 @@ const Table2 = () => {
                 {/* ID */}
                 <TableItem class="tableitem table1_item1" font="font_light h5_2" text={i.id} />
 
-                {/* EVENT NAME */}
-                <TableItem
-                  class="tableitem table1_item3"
-                  font="font_light"
-                  text={i.event?.title}
-                />
-
                 {/* TICKETS */}
-                <TableItem class="tableitem table1_item1" font="font_bold h5_2" text={i.tickets_number} />
+                <TableItem class="tableitem table1_item1" font="font_bold h5_2" text={i.tickets_no} />
 
                 {/* PHONE */}
-                <TableItem class="tableitem table1_item1" font="font_light h5_2" text={i.phone} />
+                <TableItem class="tableitem table1_item1" font="font_light h5_2" text={i.phone_no} />
 
                 {/* EMAIL */}
                 <TableItem class="tableitem table1_item3" font="font_light h5_2" text={i.email} />
+
+                {/* DAY */}
+                <TableItem class="tableitem table1_item3" font="font_light h5_2" text={i.day} />
+
                 {/* CREATED AT */}
                 <div className="tableitem table1_item6">
                   <h5 className="font_light h5_2">{i.created_at}</h5>
