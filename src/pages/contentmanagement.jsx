@@ -5,6 +5,7 @@ import TitleBlock from '../components/common/title';
 import Footer from '../components/layout/footer';
 import Table5 from '../components/sections/table5';
 import Table3 from '../components/sections/table3';
+import Table7 from '../components/sections/table7';
 
 const ContentManagement = () => {
 
@@ -72,6 +73,7 @@ const ContentManagement = () => {
                 </div>
                 < Table5 />
                 <Table3 />
+                <Table7 />
 
            </section>
         <Footer />

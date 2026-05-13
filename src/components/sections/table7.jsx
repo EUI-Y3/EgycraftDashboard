@@ -119,7 +119,7 @@ const Table7 = () => {
   return (
     <>
       <div id="FAQ-management" data-section className="container_3 table_container">
-
+        <h2>FAQ Management</h2>
         {/* HEADER */}
         <div className="heading_buttonflex1">
           <div className="searchbar2">
