@@ -6,7 +6,7 @@ import Sections from './pages/sections';
 import Events from './pages/events';
 import Tickets from './pages/tickets';
 import Categories from './pages/categories';
-import HeaderContent from './pages/headermanagement';
+import ContentManagement from './pages/contentmanagement';
 import Feedback from './pages/feedback';
 import Error from './pages/error';
 import Vendors from './pages/feedback';
@@ -21,7 +21,7 @@ function Paths() {
         <Route path="/tickets" element={<Tickets />} />
         <Route path="/sections" element={<Sections />} />
         <Route path="/events" element={<Events />} />
-        <Route path="/header" element={<HeaderContent />} />
+        <Route path="/contentmanagement" element={<ContentManagement />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/vendors" element={<Vendors />} />
 

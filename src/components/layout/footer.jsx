@@ -7,7 +7,7 @@ const Footer = () => {
         <footer>
             <div className="btnFlex">
                 <img src={logo} alt="" />
-        <p>© Ma7gouz EGYPT. All Rights Reserved.</p>
+        <p>Designed by FM Studios © EGYCRAFT. All Rights Reserved.</p>
             </div>
         </footer>
     </div>

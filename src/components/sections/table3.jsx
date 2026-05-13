@@ -6,41 +6,31 @@ import search from "./../../assets/seaechbar.svg";
 import delete1 from "./../../assets/delete.svg";
 import edit from "./../../assets/edit.svg";
 import close1 from "./../../assets/close.svg";
-// import TableItem from "../common/tableitem";
 import Heading from "../common/heading";
 
 import { supabase } from "../../supabase";
 import "./sectioncont.css";
 
 const Table3 = () => {
-  // STATESS
+  // STATE
   const [sections, setSections] = useState([]);
-// SEARCH
 
   // EDIT STATE
   const [selectedSection, setSelectedSection] = useState(null);
   const [isEditOpen, setIsEditOpen] = useState(false);
-
-  const [heading, setHeading] = useState("");
-  const [headingAR, setHeadingAR] = useState("");
-  const [subheading, setSubheading] = useState("");
-  const [subheadingAR, setSubheadingAR] = useState("");
-  const [paragraph, setParagraph] = useState("");
-  const [paragraphAR, setParagraphAR] = useState("");
+  const [title, setTitle] = useState("");
+  const [subtitile, setSubtitile] = useState("");
+  const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
 
   // CREATE STATE
   const [isNewOpen, setIsNewOpen] = useState(false);
-
-  const [newHeading, setNewHeading] = useState("");
-  const [newHeadingAR, setNewHeadingAR] = useState("");
-  const [newSubheading, setNewSubheading] = useState("");
-  const [newSubheadingAR, setNewSubheadingAR] = useState("");
-  const [newParagraph, setNewParagraph] = useState("");
-  const [newParagraphAR, setNewParagraphAR] = useState("");
+  const [newTitle, setNewTitle] = useState("");
+  const [newSubtitile, setNewSubtitile] = useState("");
+  const [newDescription, setNewDescription] = useState("");
   const [newImage, setNewImage] = useState("");
 
-  // GET ALL SECTIONS
+  // GET ALL
   const getAllSections = async () => {
     const { data, error } = await supabase.from("section").select("*");
 
@@ -52,7 +42,6 @@ const Table3 = () => {
     setSections(data);
   };
 
-  // GET ALL ON LOAD
   useEffect(() => {
     getAllSections();
   }, []);
@@ -63,12 +52,9 @@ const Table3 = () => {
 
     const { error } = await supabase.from("section").insert([
       {
-        heading: newHeading,
-        headingAR: newHeadingAR,
-        subheading: newSubheading,
-        subheadingAR: newSubheadingAR,
-        paragraph: newParagraph,
-        paragraphAR: newParagraphAR,
+        title: newTitle,
+        subtitile: newSubtitile,
+        description: newDescription,
         image: newImage,
       },
     ]);
@@ -79,14 +65,9 @@ const Table3 = () => {
     }
 
     await getAllSections();
-
-    // RESET
-    setNewHeading("");
-    setNewHeadingAR("");
-    setNewSubheading("");
-    setNewSubheadingAR("");
-    setNewParagraph("");
-    setNewParagraphAR("");
+    setNewTitle("");
+    setNewSubtitile("");
+    setNewDescription("");
     setNewImage("");
     setIsNewOpen(false);
   };
@@ -100,12 +81,9 @@ const Table3 = () => {
   // OPEN EDIT POPUP
   const openEdit = (section) => {
     setSelectedSection(section);
-    setHeading(section.heading || "");
-    setHeadingAR(section.headingAR || "");
-    setSubheading(section.subheading || "");
-    setSubheadingAR(section.subheadingAR || "");
-    setParagraph(section.paragraph || "");
-    setParagraphAR(section.paragraphAR || "");
+    setTitle(section.title || "");
+    setSubtitile(section.subtitile || "");
+    setDescription(section.description || "");
     setImage(section.image || "");
     setIsEditOpen(true);
   };
@@ -118,31 +96,20 @@ const Table3 = () => {
   // OPEN NEW POPUP
   const openNew = () => setIsNewOpen(true);
   const closeNew = () => {
-    setNewHeading("");
-    setNewHeadingAR("");
-    setNewSubheading("");
-    setNewSubheadingAR("");
-    setNewParagraph("");
-    setNewParagraphAR("");
+    setNewTitle("");
+    setNewSubtitile("");
+    setNewDescription("");
     setNewImage("");
     setIsNewOpen(false);
   };
 
-  // EDIT / UPDATE
+  // UPDATE
   const handleUpdate = async (e) => {
     e.preventDefault();
 
     const { error } = await supabase
       .from("section")
-      .update({
-        heading,
-        headingAR,
-        subheading,
-        subheadingAR,
-        paragraph,
-        paragraphAR,
-        image,
-      })
+      .update({ title, subtitile, description, image })
       .eq("id", selectedSection.id);
 
     if (error) {
@@ -156,7 +123,7 @@ const Table3 = () => {
 
   return (
     <>
-      <div className="container_3 table_container">
+      <div id="section-management" data-section className="container_3 table_container">
         {/* HEADER */}
         <div className="heading_buttonflex1">
           <div className="searchbar2">
@@ -173,7 +140,6 @@ const Table3 = () => {
 
         {/* TABLE */}
         <div className="flex_column table1">
-          {/* TABLE HEADER */}
           <div className="table1_header">
             <h5>All Sections ({sections.length})</h5>
           </div>
@@ -181,10 +147,9 @@ const Table3 = () => {
           {/* ROWS */}
           {sections.map((i) => (
             <div key={i.id} className="sections_container background2">
-              {/* SECTION NO AND CONTROLS */}
+              {/* ID AND CONTROLS */}
               <div className="flex heading_buttonflex1">
-                <h1 className="font_bold"> #{`${i.id}`}
-                </h1>
+                <h1 className="font_bold">#{i.id}</h1>
                 <div className="flex relatedcontrols">
                   <div>
                     <button onClick={() => deleteSection(i.id)} title="delete" className="btn5">
@@ -197,50 +162,31 @@ const Table3 = () => {
                 </div>
               </div>
 
-              {/* CONTENT START */}
+              {/* CONTENT */}
               <div className="sections_containerheadercontent sections_titles">
                 <div className="flex_column label_inputflex">
-                  <h5 className="font_bold">Heading</h5>
-                  <p>{i.heading}</p>
+                  <h5 className="font_bold">Title</h5>
+                  <p>{i.title}</p>
                 </div>
                 <div className="flex_column label_inputflex">
-                  <h5 className="font_bold">Heading AR</h5>
-                  <p>{i.headingAR}</p>
+                  <h5 className="font_bold">Subtitle</h5>
+                  <p>{i.subtitile}</p>
                 </div>
               </div>
-              {/* 2 */}
-               <div className="sections_containerheadercontent sections_titles">
-                <div className="flex_column label_inputflex">
-                  <h5 className="font_bold">Subheading</h5>
-                  <p>{i.subheading}</p>
-                </div>
-                <div className="flex_column label_inputflex">
-                  <h5 className="font_bold">Subheading AR</h5>
-                  <p>{i.subheadingAR}</p>
-                </div>
+
+              <div className="flex_column label_inputflex">
+                <h5 className="font_bold">Description</h5>
+                <p>{i.description}</p>
               </div>
-              {/* 3 */}
-               <div className="sections_containerheadercontent sections_titles">
-                <div className="flex_column label_inputflex">
-                  <h5 className="font_bold">Paragraph</h5>
-                  <p>{i.paragraph}</p>
-                </div>
-                <div className="flex_column label_inputflex">
-                  <h5 className="font_bold">Paragraph AR</h5>
-                  <p>{i.paragraphAR}</p>
-                </div>
-              </div>
-              {/* 4 */}
+
               <div className="flex_column label_inputflex">
                 <h5 className="font_bold">Image</h5>
-                      <img className="secImg" src={i.image} alt="section" />
-                
+                <img className="secImg" src={i.image} alt="section" />
               </div>
 
               <div className="sections_status">
-                <h5> Last Updated </h5>
-                <p className="highlighted">{`  ${i.updated_at} `}</p>
-                
+                <h5>Created At</h5>
+                <p className="highlighted">{i.created_at}</p>
               </div>
             </div>
           ))}
@@ -256,50 +202,26 @@ const Table3 = () => {
 
               <Heading heading="New Section" />
 
-              <div className="chipsFlex">
-                <input
-                  type="text"
-                  placeholder="Heading"
-                  value={newHeading}
-                  onChange={(e) => setNewHeading(e.target.value)}
-                />
-                <input
-                  type="text"
-                  placeholder="Heading AR"
-                  value={newHeadingAR}
-                  onChange={(e) => setNewHeadingAR(e.target.value)}
-                />
-              </div>
+              <input
+                type="text"
+                placeholder="Title"
+                value={newTitle}
+                onChange={(e) => setNewTitle(e.target.value)}
+              />
 
-              <div className="chipsFlex">
-                <input
-                  type="text"
-                  placeholder="Subheading"
-                  value={newSubheading}
-                  onChange={(e) => setNewSubheading(e.target.value)}
-                />
-                <input
-                  type="text"
-                  placeholder="Subheading AR"
-                  value={newSubheadingAR}
-                  onChange={(e) => setNewSubheadingAR(e.target.value)}
-                />
-              </div>
+              <input
+                type="text"
+                placeholder="Subtitle"
+                value={newSubtitile}
+                onChange={(e) => setNewSubtitile(e.target.value)}
+              />
 
-              <div className="chipsFlex">
-                <input
-                  type="text"
-                  placeholder="Paragraph"
-                  value={newParagraph}
-                  onChange={(e) => setNewParagraph(e.target.value)}
-                />
-                <input
-                  type="text"
-                  placeholder="Paragraph AR"
-                  value={newParagraphAR}
-                  onChange={(e) => setNewParagraphAR(e.target.value)}
-                />
-              </div>
+              <input
+                type="text"
+                placeholder="Description"
+                value={newDescription}
+                onChange={(e) => setNewDescription(e.target.value)}
+              />
 
               <input
                 type="text"
@@ -325,50 +247,26 @@ const Table3 = () => {
 
               <Heading heading="Edit Section" />
 
-              <div className="chipsFlex">
-                <input
-                  type="text"
-                  placeholder="Heading"
-                  value={heading}
-                  onChange={(e) => setHeading(e.target.value)}
-                />
-                <input
-                  type="text"
-                  placeholder="Heading AR"
-                  value={headingAR}
-                  onChange={(e) => setHeadingAR(e.target.value)}
-                />
-              </div>
+              <input
+                type="text"
+                placeholder="Title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
 
-              <div className="chipsFlex">
-                <input
-                  type="text"
-                  placeholder="Subheading"
-                  value={subheading}
-                  onChange={(e) => setSubheading(e.target.value)}
-                />
-                <input
-                  type="text"
-                  placeholder="Subheading AR"
-                  value={subheadingAR}
-                  onChange={(e) => setSubheadingAR(e.target.value)}
-                />
-              </div>
+              <input
+                type="text"
+                placeholder="Subtitle"
+                value={subtitile}
+                onChange={(e) => setSubtitile(e.target.value)}
+              />
 
-              <div className="chipsFlex">
-                <input
-                  type="text"
-                  placeholder="Paragraph"
-                  value={paragraph}
-                  onChange={(e) => setParagraph(e.target.value)}
-                />
-                <input
-                  type="text"
-                  placeholder="Paragraph AR"
-                  value={paragraphAR}
-                  onChange={(e) => setParagraphAR(e.target.value)}
-                />
-              </div>
+              <input
+                type="text"
+                placeholder="Description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
 
               <input
                 type="text"

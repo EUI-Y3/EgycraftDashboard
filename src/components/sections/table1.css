@@ -164,11 +164,11 @@ background: #FFF9F0;
 .selection:active{
     border: 1px solid #0b7f7b;
 }
-.chipsFlex{
+/* .chipsFlex{
     width: 100%;
     position: relative;
     height: auto;
-}
+} */
 .filter{
     width: min-content;
 }

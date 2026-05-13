@@ -18,7 +18,7 @@ import icon7 from './../../assets/category.svg';
 const Navigations = () => {
     return ( <>
     <Navitem icon={icon1} title="Dashboard"  link="/dashboard" style1="asideNav" index={1} />
-            <Navitem icon={icon2} title="Web Content" link="/header"    style1="asideNav" index={2} />
+            <Navitem icon={icon2} title="Web Content" link="/contentmanagement"    style1="asideNav" index={2} />
             <Navitem icon={icon5} title="Booths"      link="/sections"  style1="asideNav" index={3} />
             <Navitem icon={icon3} title="Event"       link="/events"    style1="asideNav" index={4} />
             <Navitem icon={icon7} title="Categories"  link="/categories" style1="asideNav" index={5} />

@@ -28,7 +28,7 @@ const Error = () => {
                 <Button
                 class="btn1"
                 cta=" Back home"
-                link="/"
+                link="/dashboard"
                 />
             </div>
         </section>

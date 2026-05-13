@@ -115,7 +115,7 @@ const Table5 = () => {
 
   return (
     <>
-      <div className="container_3 table_container">
+      <div id="header-management" data-section className="container_3 table_container">
         {/* HEADER */}
         <h2>
           Website Main Navigations

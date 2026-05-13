@@ -96,10 +96,10 @@ h5{
     flex-wrap: wrap;
 }
 p{
-    color: #FFF;
+    color: #2d2d2d;
     font-size: 16px;
     font-style: normal;
-    font-weight: 200;
+    font-weight: 300;
     line-height: 140%;
 }
 .aboutUsImg{
@@ -205,3 +205,38 @@ h1{
 }
 }
 
+.chipsFlex{
+    background: #F1DFD1;
+    display: inline-flex;
+    padding: 9px 12px;
+    align-items: flex-start;
+    gap: 22px;
+    /* max-width: 408px; */
+    border-radius: 10px;
+    box-shadow:
+        0 1px 3px 0 rgba(0, 0, 0, 0.10),
+        0 1px 2px -1px rgba(0, 0, 0, 0.10);
+        position: fixed;
+        top: 80px;
+        /* bottom: 20px; */
+        right: 20px;
+        z-index: 999;
+        width: 80%;
+}
+
+.chip{
+    display: flex;
+    padding: 10px 22px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    font-weight: 450;
+    text-decoration: none;
+    transition: 0.25s ease;
+    color: inherit;
+}
+
+.chip.active{
+    background: #18466F;
+    color: #FFF9F0;
+}
