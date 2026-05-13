@@ -7,7 +7,8 @@
     align-items: flex-start;
     gap: 22px;
     flex: 1 0 0;
-    background-color: #191518;
+    background-color: #dfd4be8c;
+    border-radius: 22px;
 }
 .sections_titles{
     width: 100%;

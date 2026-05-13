@@ -12,65 +12,54 @@ import { supabase } from "../../supabase";
 import Heading from "../common/heading";
 
 const Table5 = () => {
-  // STATE 
-  const [headerItems, setHeaderItems] = useState([]);
+  // STATE
+  const [navItems, setNavItems] = useState([]);
 
   // SEARCH STATE
   const [searchQuery, setSearchQuery] = useState("");
 
   // CREATE STATE
-  const [titleEn, setTitleEn] = useState("");
-  const [titleAr, setTitleAr] = useState("");
+  const [name, setName] = useState("");
   const [link, setLink] = useState("");
-
   const [isOpen, setIsOpen] = useState(false);
 
   // EDIT STATE
   const [selectedItem, setSelectedItem] = useState(null);
-  const [editTitleEn, setEditTitleEn] = useState("");
-  const [editTitleAr, setEditTitleAr] = useState("");
+  const [editName, setEditName] = useState("");
   const [editLink, setEditLink] = useState("");
-
   const [isEditOpen, setIsEditOpen] = useState(false);
 
-  // GET HEADER ITEMS
-  const getAllHeaderItems = async () => {
-    const { data, error } = await supabase.from("header_item").select("*");
+  // GET ALL
+  const getAllNavItems = async () => {
+    const { data, error } = await supabase.from("navigation").select("*");
 
     if (error) {
       console.log(error);
       return;
     }
 
-    setHeaderItems(data);
+    setNavItems(data);
   };
 
-  // GET ALL ON LOAD
   useEffect(() => {
-    getAllHeaderItems();
+    getAllNavItems();
   }, []);
 
-  // FILTERED HEADER ITEMS
-  const filteredHeaderItems = headerItems.filter((i) => {
-    const matchesSearch =
+  // FILTERED
+  const filteredNavItems = navItems.filter((i) => {
+    return (
       searchQuery === "" ||
-      i.title_EN?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      i.title_AR?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      i.link?.toLowerCase().includes(searchQuery.toLowerCase());
-
-    return matchesSearch;
+      i.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      i.link?.toLowerCase().includes(searchQuery.toLowerCase())
+    );
   });
 
   // CREATE
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { error } = await supabase.from("header_item").insert([
-      {
-        title_EN: titleEn,
-        title_AR: titleAr,
-        link: link,
-      },
+    const { error } = await supabase.from("navigation").insert([
+      { name, link },
     ]);
 
     if (error) {
@@ -78,26 +67,22 @@ const Table5 = () => {
       return;
     }
 
-    await getAllHeaderItems();
-
-    // RESET
-    setTitleEn("");
-    setTitleAr("");
+    await getAllNavItems();
+    setName("");
     setLink("");
     setIsOpen(false);
   };
 
   // DELETE
-  const deleteHeaderItem = async (id) => {
-    await supabase.from("header_item").delete().eq("id", id);
-    await getAllHeaderItems();
+  const deleteNavItem = async (id) => {
+    await supabase.from("navigation").delete().eq("id", id);
+    await getAllNavItems();
   };
 
   // OPEN EDIT POPUP
   const openEdit = (item) => {
     setSelectedItem(item);
-    setEditTitleEn(item.title_EN || "");
-    setEditTitleAr(item.title_AR || "");
+    setEditName(item.name || "");
     setEditLink(item.link || "");
     setIsEditOpen(true);
   };
@@ -112,12 +97,8 @@ const Table5 = () => {
     e.preventDefault();
 
     const { error } = await supabase
-      .from("header_item")
-      .update({
-        title_EN: editTitleEn,
-        title_AR: editTitleAr,
-        link: editLink,
-      })
+      .from("navigation")
+      .update({ name: editName, link: editLink })
       .eq("id", selectedItem.id);
 
     if (error) {
@@ -125,11 +106,10 @@ const Table5 = () => {
       return;
     }
 
-    await getAllHeaderItems();
+    await getAllNavItems();
     closeEdit();
   };
 
-  // CREATE POPUP
   const openPopup = () => setIsOpen(true);
   const closePopup = () => setIsOpen(false);
 
@@ -137,45 +117,45 @@ const Table5 = () => {
     <>
       <div className="container_3 table_container">
         {/* HEADER */}
+        <h2>
+          Website Main Navigations
+        </h2>
         <div className="heading_buttonflex1">
-
-          {/* SEARCH */}
           <div className="searchbar2">
             <button className="btn5" type="button">
               <img src={search} alt="search" />
             </button>
             <input
               type="text"
-              placeholder="Search header item.."
+              placeholder="Search navigation..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
 
           <button className="btn1" onClick={openPopup}>
-            New Header Item
+            New Nav Item
           </button>
         </div>
 
         {/* TABLE */}
         <div className="flex_column table1">
-          {/* HEADER */}
+          {/* HEADER ROW */}
           <div className="table1_header">
             <TableItem class="tableitem table1_item3" font="font_bold" text="Actions" />
             <TableItem class="tableitem table1_item1" font="font_bold" text="ID" />
-            <TableItem class="tableitem table1_item3" font="font_bold" text="Title EN" />
-            <TableItem class="tableitem table1_item3" font="font_bold" text="Title AR" />
+            <TableItem class="tableitem table1_item3" font="font_bold" text="Name" />
             <TableItem class="tableitem table1_item4" font="font_bold" text="Link" />
             <TableItem class="tableitem table1_item6" font="font_bold" text="Created At" />
           </div>
 
           {/* ROWS */}
-          {filteredHeaderItems.length > 0 ? (
-            filteredHeaderItems.map((i) => (
+          {filteredNavItems.length > 0 ? (
+            filteredNavItems.map((i) => (
               <div key={i.id} className="table1_header table_row1">
                 <div className="tableitem table1_item3">
                   <div className="tableitem_img">
-                    <button onClick={() => deleteHeaderItem(i.id)} title="delete" className="btn5">
+                    <button onClick={() => deleteNavItem(i.id)} title="delete" className="btn5">
                       <img src={delete1} alt="" />
                     </button>
                     <button onClick={() => openEdit(i)} title="edit" className="btn5">
@@ -185,8 +165,7 @@ const Table5 = () => {
                 </div>
 
                 <TableItem class="tableitem table1_item1" font="font_light h5_2" text={i.id} />
-                <TableItem class="tableitem table1_item3" font="font_light" text={i.title_EN} />
-                <TableItem class="tableitem table1_item3" font="font_light" text={i.title_AR} />
+                <TableItem class="tableitem table1_item3" font="font_light" text={i.name} />
                 <TableItem class="tableitem table1_item4" font="font_light h5_2" text={i.link} />
 
                 <div className="tableitem table1_item6">
@@ -196,9 +175,7 @@ const Table5 = () => {
             ))
           ) : (
             <div className="table1_header">
-              <h5 className="font_light h5_2">
-                No header items found.
-              </h5>
+              <h5 className="font_light h5_2">No navigation items found.</h5>
             </div>
           )}
         </div>
@@ -210,22 +187,15 @@ const Table5 = () => {
               <button type="button" className="btn3 closed" onClick={closePopup}>
                 <img src={close1} alt="" />
               </button>
-              <Heading heading="Create Header Item" />
+              <Heading heading="Create Nav Item" />
 
-              <div className="chipsFlex">
+              <div className="inputFlex">
                 <input
-                  type="text"
-                  placeholder="Title EN"
-                  value={titleEn}
-                  onChange={(e) => setTitleEn(e.target.value)}
-                />
-                <input
-                  type="text"
-                  placeholder="Title AR"
-                  value={titleAr}
-                  onChange={(e) => setTitleAr(e.target.value)}
-                />
-              </div>
+                type="text"
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
 
               <input
                 type="text"
@@ -233,8 +203,9 @@ const Table5 = () => {
                 value={link}
                 onChange={(e) => setLink(e.target.value)}
               />
+              </div>
 
-              <button type="submit" className="btn1 btn4">Create Header Item</button>
+              <button type="submit" className="btn1 btn4">Create Nav Item</button>
             </form>
           </div>
         </div>
@@ -246,22 +217,15 @@ const Table5 = () => {
               <button type="button" className="btn3 closed" onClick={closeEdit}>
                 <img src={close1} alt="" />
               </button>
-              <Heading heading="Edit Header Item" />
+              <Heading heading="Edit Nav Item" />
 
-              <div className="chipsFlex">
+              <div className="inputFlex">
                 <input
-                  type="text"
-                  placeholder="Title EN"
-                  value={editTitleEn}
-                  onChange={(e) => setEditTitleEn(e.target.value)}
-                />
-                <input
-                  type="text"
-                  placeholder="Title AR"
-                  value={editTitleAr}
-                  onChange={(e) => setEditTitleAr(e.target.value)}
-                />
-              </div>
+                type="text"
+                placeholder="Name"
+                value={editName}
+                onChange={(e) => setEditName(e.target.value)}
+              />
 
               <input
                 type="text"
@@ -269,12 +233,12 @@ const Table5 = () => {
                 value={editLink}
                 onChange={(e) => setEditLink(e.target.value)}
               />
+              </div>
 
               <button type="submit" className="btn1 btn4">Save Changes</button>
             </form>
           </div>
         </div>
-
       </div>
     </>
   );

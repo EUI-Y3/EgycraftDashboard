@@ -20,7 +20,6 @@ const Sections = () => {
                 subheading="Manage and edit all sections on Ma7gouz's official website"
                 />
                 
-                <Table3 />
 
 
            </section>

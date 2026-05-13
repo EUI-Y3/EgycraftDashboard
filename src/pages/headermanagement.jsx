@@ -6,6 +6,7 @@ import TitleBlock from '../components/common/title';
 
 import Footer from '../components/layout/footer';
 import Table5 from '../components/sections/table5';
+import Table3 from '../components/sections/table3';
 
 const HeaderContent = () => {
     return ( <>
@@ -18,12 +19,12 @@ const HeaderContent = () => {
             </div>
              <TitleBlock
                 class="title1"
-                heading="Events Management"
-                subheading="Manage and edit all events on Ma7gouz"
+                heading="Content Management"
+                subheading="Manage and edit all web content on the EgyCraft Website"
                 />
                 
                 <Table5 />
-
+                <Table3 />
 
            </section>
         <Footer />
