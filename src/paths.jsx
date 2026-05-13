@@ -8,6 +8,8 @@ import Tickets from './pages/tickets';
 import Categories from './pages/categories';
 import HeaderContent from './pages/headermanagement';
 import Feedback from './pages/feedback';
+import Error from './pages/error';
+import Vendors from './pages/feedback';
 
 function Paths() {
     return (
@@ -21,8 +23,9 @@ function Paths() {
         <Route path="/events" element={<Events />} />
         <Route path="/header" element={<HeaderContent />} />
         <Route path="/categories" element={<Categories />} />
-        <Route path="/feedback" element={<Feedback />} />
+        <Route path="/vendors" element={<Vendors />} />
 
+        <Route path="*" element={<Error />} />
     </Routes>
     </BrowserRouter>
     );

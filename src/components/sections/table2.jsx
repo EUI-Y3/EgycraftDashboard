@@ -97,7 +97,6 @@ const Table2 = () => {
 
                 {/* ID */}
                 <TableItem class="tableitem table1_item1" font="font_light h5_2" text={i.id} />
-
                 {/* TICKETS */}
                 <TableItem class="tableitem table1_item1" font="font_bold h5_2" text={i.tickets_no} />
 

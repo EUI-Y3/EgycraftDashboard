@@ -8,19 +8,19 @@ import Footer from '../components/layout/footer';
 // import Table5 from '../components/sections/table5';
 import Table6 from '../components/sections/table6';
 
-const Feedback = () => {
+const Vendors = () => {
     return ( <>
     <div className='body2'>
     <Aside />
-        <main className='main2'>
+        <main id='main-content' className='main2'>
             <Navbar />
            <section className='mainCont'>
             <div className="tableFlex">
             </div>
              <TitleBlock
                 class="title1"
-                heading="Events Management"
-                subheading="Manage and edit all events on Ma7gouz"
+                heading="Vendors Management"
+                subheading="Manage and edit all Vendors in EgyCraft Exhibition"
                 />
                 
                 <Table6 />
@@ -34,4 +34,4 @@ const Feedback = () => {
     </> );
 }
  
-export default Feedback;
+export default Vendors;

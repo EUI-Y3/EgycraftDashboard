@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   LineChart, Line,
   AreaChart, Area,
@@ -7,6 +7,7 @@ import {
   ResponsiveContainer
 } from "recharts";
 import Heading from "../common/heading";
+import { supabase } from "../../supabase";
 
 const revenueData = [
   { month: "Jan", revenue: 4000 },
@@ -16,17 +17,12 @@ const revenueData = [
   { month: "May", revenue: 6000 },
 ];
 
-const userData = [
-  { month: "Jan", users: 1000 },
-  { month: "Feb", users: 2000 },
-  { month: "Mar", users: 3500 },
-  { month: "Apr", users: 5000 },
-  { month: "May", users: 7000 },
-];
-
 export function TicketRevenueChart() {
   return (
-    <div style={{ minWidth: "48%", padding: "16px", borderRadius: "12px", border:"3px solid #0B7F7B" }} className="bg-[#1e1e1e] rounded-2xl w-full border border-[#ff29d1] shadow-md">
+    <div
+      style={{ minWidth: "48%", padding: "16px", borderRadius: "12px", border: "3px solid #0B7F7B" }}
+      className="bg-[#1e1e1e] rounded-2xl w-full border border-[#ff29d1] shadow-md"
+    >
       <div className="p-5">
         <Heading heading="Ticket Revenue" />
         <div className="w-full h-[400px]">
@@ -43,12 +39,12 @@ export function TicketRevenueChart() {
 
               <XAxis
                 dataKey="month"
-                stroke="#ccc"
+                stroke="#2a2929"
                 style={{ fontSize: "12px" }}
               />
 
               <YAxis
-                stroke="#ccc"
+                stroke="#2a2929"
                 style={{ fontSize: "12px" }}
               />
 
@@ -77,43 +73,85 @@ export function TicketRevenueChart() {
 }
 
 export function UserGrowthChart() {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchStarRatings() {
+      const { data: rows, error } = await supabase
+        .from("feedback")
+        .select("stars");
+
+      if (error) {
+        console.error("Error fetching feedback:", error);
+        setLoading(false);
+        return;
+      }
+
+      const counts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+      rows.forEach(({ stars }) => {
+        if (stars >= 1 && stars <= 5) counts[stars]++;
+      });
+
+      const chartData = Object.entries(counts).map(([star, count]) => ({
+        star: `${star}★`,
+        count,
+      }));
+
+      setData(chartData);
+      setLoading(false);
+    }
+
+    fetchStarRatings();
+  }, []);
+
   return (
-    <div style={{ minWidth: "48%", padding: "16px", borderRadius: "12px", border: "3px solid #0B7F7B" }} className="bg-[#1e1e1e] rounded-2xl w-full border border-[#ff29d1] shadow-md">
+    <div
+      style={{ minWidth: "48%", padding: "16px", borderRadius: "12px", border: "3px solid #0B7F7B" }}
+      className="bg-[#1e1e1e] rounded-2xl w-full border border-[#ff29d1] shadow-md"
+    >
       <div className="p-5">
-        <Heading heading="User Growth" />
+        <Heading heading="Star Ratings" />
         <div className="w-full h-[400px]">
-          <ResponsiveContainer width="100%" height={400}>
-            <LineChart data={userData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#444" opacity={0.3} />
+          {loading ? (
+            <div className="flex items-center justify-center h-full text-gray-400">
+              Loading...
+            </div>
+          ) : (
+            <ResponsiveContainer width="100%" height={400}>
+              <LineChart data={data}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#444" opacity={0.3} />
 
-              <XAxis
-                dataKey="month"
-                stroke="#ccc"
-                style={{ fontSize: "12px" }}
-              />
-              <YAxis
-                stroke="#ccc"
-                style={{ fontSize: "12px" }}
-              />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: "#1e1e1e",
-                  border: "1px solid #fa5e61",
-                  borderRadius: "8px",
-                  color: "#fff",
-                }}
-              />
+                <XAxis
+                  dataKey="star"
+                  stroke="#2a2929"
+                  style={{ fontSize: "12px" }}
+                />
+                <YAxis
+                  stroke="#2a2929"
+                  style={{ fontSize: "12px" }}
+                  allowDecimals={false}
+                />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "#1e1e1e",
+                    border: "1px solid #fa5e61",
+                    borderRadius: "8px",
+                    color: "#fff",
+                  }}
+                />
 
-              <Line
-                type="monotone"
-                dataKey="users"
-                stroke="#fa5e61"
-                strokeWidth={3}
-                dot={{ r: 4 }}
-                activeDot={{ r: 6 }}
-              />
-            </LineChart>
-          </ResponsiveContainer>
+                <Line
+                  type="monotone"
+                  dataKey="count"
+                  stroke="#fa5e61"
+                  strokeWidth={3}
+                  dot={{ r: 4 }}
+                  activeDot={{ r: 6 }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          )}
         </div>
       </div>
     </div>

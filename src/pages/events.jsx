@@ -14,7 +14,7 @@ const Events = () => {
     return ( <>
     <div className='body2'>
     <Aside />
-        <main className='main2'>
+        <main id='main-content' className='main2'>
             <Navbar />
            <section className='mainCont'>
             <div className="tableFlex">
