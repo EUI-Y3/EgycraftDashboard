@@ -12,58 +12,70 @@ import { supabase } from "../../supabase";
 import Heading from "../common/heading";
 
 const Table1 = () => {
-  // ================= STATE =================
-  const [events, setEvents] = useState([]);
-  const [categories, setCategories] = useState([]);
 
-  // SEARCH & FILTER STATE
+  // ================= STATE =================
+  const [vendors, setVendors] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [booths, setBooths] = useState([]);
+  const [products, setProducts] = useState([]);
+
+  // SEARCH & FILTER
   const [searchQuery, setSearchQuery] = useState("");
   const [filterCategory, setFilterCategory] = useState("");
 
   // CREATE STATE
-  const [eventTitle, setEventTitle] = useState("");
-  const [titleAr, setTitleAr] = useState("");
-  const [description, setDescription] = useState("");
-  const [location, setLocation] = useState("");
-  const [price, setPrice] = useState("");
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
-  const [image, setImage] = useState("");
+  const [name, setName] = useState("");
+  const [boothId, setBoothId] = useState("");
   const [categoryId, setCategoryId] = useState("");
+  const [productId, setProductId] = useState("");
+  const [profilePic, setProfilePic] = useState("");
+  const [description, setDescription] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [instagram, setInstagram] = useState("");
+  const [facebook, setFacebook] = useState("");
 
   const [isOpen, setIsOpen] = useState(false);
 
   // EDIT STATE
-  const [selectedEvent, setSelectedEvent] = useState(null);
-  const [editTitle, setEditTitle] = useState("");
-  const [editTitleAr, setEditTitleAr] = useState("");
-  const [editDescription, setEditDescription] = useState("");
-  const [editLocation, setEditLocation] = useState("");
-  const [editPrice, setEditPrice] = useState("");
-  const [editDate, setEditDate] = useState("");
-  const [editTime, setEditTime] = useState("");
-  const [editImage, setEditImage] = useState("");
+  const [selectedVendor, setSelectedVendor] = useState(null);
+
+  const [editName, setEditName] = useState("");
+  const [editBoothId, setEditBoothId] = useState("");
   const [editCategoryId, setEditCategoryId] = useState("");
+  const [editProductId, setEditProductId] = useState("");
+  const [editProfilePic, setEditProfilePic] = useState("");
+  const [editDescription, setEditDescription] = useState("");
+  const [editPhone, setEditPhone] = useState("");
+  const [editEmail, setEditEmail] = useState("");
+  const [editInstagram, setEditInstagram] = useState("");
+  const [editFacebook, setEditFacebook] = useState("");
 
   const [isEditOpen, setIsEditOpen] = useState(false);
 
-  // GET EVENTS
-  const getAllEvents = async () => {
+  // ================= GET DATA =================
+
+  const getAllVendors = async () => {
     const { data, error } = await supabase
-      .from("event")
-      .select("*, Category(title)");
+      .from("vendors")
+      .select(`
+        *,
+        categories:category_ID(title),
+        booths:booth_ID(booth_no)
+      `);
 
     if (error) {
       console.log(error);
       return;
     }
 
-    setEvents(data);
+    setVendors(data);
   };
 
-  // GET CATEGORIES
   const getCategories = async () => {
-    const { data, error } = await supabase.from("Category").select("*");
+    const { data, error } = await supabase
+      .from("categories")
+      .select("*");
 
     if (error) {
       console.log(error);
@@ -73,299 +85,536 @@ const Table1 = () => {
     setCategories(data);
   };
 
-  // GET ALL ON LOAD
+  const getBooths = async () => {
+    const { data, error } = await supabase
+      .from("booths")
+      .select("*");
+
+    if (error) {
+      console.log(error);
+      return;
+    }
+
+    setBooths(data);
+  };
+
+  const getProducts = async () => {
+    const { data, error } = await supabase
+      .from("products")
+      .select("*");
+
+    if (error) {
+      console.log(error);
+      return;
+    }
+
+    setProducts(data);
+  };
+
   useEffect(() => {
-    getAllEvents();
+    getAllVendors();
     getCategories();
+    getBooths();
+    getProducts();
   }, []);
 
-  // FILTERED EVENTS — derived from search + category filter, no extra fetches needed
-  const filteredEvents = events.filter((i) => {
+  // ================= FILTER =================
+
+  const filteredVendors = vendors.filter((i) => {
+
     const matchesSearch =
       searchQuery === "" ||
-      i.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      i.title_Ar?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      i.location?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      i.description?.toLowerCase().includes(searchQuery.toLowerCase());
+      i.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      i.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      i.email?.toLowerCase().includes(searchQuery.toLowerCase());
 
     const matchesCategory =
-      filterCategory === "" || String(i.category_id) === String(filterCategory);
+      filterCategory === "" ||
+      String(i.category_ID) === String(filterCategory);
 
     return matchesSearch && matchesCategory;
   });
 
-  // CREATE
+  // ================= CREATE =================
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { error } = await supabase.from("event").insert([
-      {
-        title: eventTitle,
-        title_Ar: titleAr,
-        description: description,
-        image: image,
-        date: date,
-        time: time,
-        location: location,
-        price: price,
-        category_id: categoryId,
-      },
-    ]);
+    const { error } = await supabase
+      .from("vendors")
+      .insert([
+        {
+          name,
+          booth_ID: boothId || null,
+          category_ID: categoryId || null,
+          product_ID: productId || null,
+          profile_pic: profilePic,
+          description,
+          phone,
+          email,
+          instagram,
+          facebook,
+        },
+      ]);
 
     if (error) {
       console.log("Insert error:", error);
       return;
     }
 
-    await getAllEvents();
+    await getAllVendors();
 
-    // RESET
-    setEventTitle("");
-    setTitleAr("");
-    setDescription("");
-    setLocation("");
-    setPrice("");
-    setDate("");
-    setTime("");
-    setImage("");
+    setName("");
+    setBoothId("");
     setCategoryId("");
+    setProductId("");
+    setProfilePic("");
+    setDescription("");
+    setPhone("");
+    setEmail("");
+    setInstagram("");
+    setFacebook("");
+
     setIsOpen(false);
   };
 
-  // DELETE
-  const deleteEvent = async (id) => {
-    await supabase.from("event").delete().eq("id", id);
-    await getAllEvents();
+  // ================= DELETE =================
+
+  const deleteVendor = async (id) => {
+    await supabase
+      .from("vendors")
+      .delete()
+      .eq("id", id);
+
+    await getAllVendors();
   };
 
-  // OPEN EDIT POPUP
-  const openEdit = (event) => {
-    setSelectedEvent(event);
-    setEditTitle(event.title || "");
-    setEditTitleAr(event.title_Ar || "");
-    setEditDescription(event.description || "");
-    setEditLocation(event.location || "");
-    setEditPrice(event.price || "");
-    setEditDate(event.date || "");
-    setEditTime(event.time || "");
-    setEditImage(event.image || "");
-    setEditCategoryId(event.category_id || "");
+  // ================= EDIT =================
+
+  const openEdit = (vendor) => {
+
+    setSelectedVendor(vendor);
+
+    setEditName(vendor.name || "");
+    setEditBoothId(vendor.booth_ID || "");
+    setEditCategoryId(vendor.category_ID || "");
+    setEditProductId(vendor.product_ID || "");
+    setEditProfilePic(vendor.profile_pic || "");
+    setEditDescription(vendor.description || "");
+    setEditPhone(vendor.phone || "");
+    setEditEmail(vendor.email || "");
+    setEditInstagram(vendor.instagram || "");
+    setEditFacebook(vendor.facebook || "");
+
     setIsEditOpen(true);
   };
 
   const closeEdit = () => {
     setIsEditOpen(false);
-    setSelectedEvent(null);
+    setSelectedVendor(null);
   };
 
-  // UPDATE
+  // ================= UPDATE =================
+
   const handleUpdate = async (e) => {
     e.preventDefault();
 
     const { error } = await supabase
-      .from("event")
+      .from("vendors")
       .update({
-        title: editTitle,
-        title_Ar: editTitleAr,
+        name: editName,
+        booth_ID: editBoothId || null,
+        category_ID: editCategoryId || null,
+        product_ID: editProductId || null,
+        profile_pic: editProfilePic,
         description: editDescription,
-        image: editImage,
-        date: editDate,
-        time: editTime,
-        location: editLocation,
-        price: editPrice,
-        category_id: editCategoryId,
+        phone: editPhone,
+        email: editEmail,
+        instagram: editInstagram,
+        facebook: editFacebook,
       })
-      .eq("id", selectedEvent.id);
+      .eq("id", selectedVendor.id);
 
     if (error) {
       console.log("Update error:", error);
       return;
     }
 
-    await getAllEvents();
+    await getAllVendors();
     closeEdit();
   };
 
-  // CREATE POPUP
+  // ================= POPUPS =================
+
   const openPopup = () => setIsOpen(true);
   const closePopup = () => setIsOpen(false);
 
   return (
     <>
       <div className="container_3 table_container">
+
         {/* HEADER */}
         <div className="heading_buttonflex1">
 
           {/* SEARCH */}
           <div className="searchbar2">
+
             <button className="btn5" type="button">
               <img src={search} alt="search" />
             </button>
+
             <input
               type="text"
-              placeholder="Search event.."
+              placeholder="Search vendor.."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
+
           </div>
 
-          {/* FILTER BY CATEGORY */}
+          {/* CATEGORY FILTER */}
           <select
             className="selection"
             value={filterCategory}
             onChange={(e) => setFilterCategory(e.target.value)}
           >
+
             <option value="">All Categories</option>
+
             {categories.map((c) => (
               <option key={c.id} value={c.id}>
                 {c.title}
               </option>
             ))}
+
           </select>
 
           <button className="btn1" onClick={openPopup}>
-            New Event
+            New Vendor
           </button>
+
         </div>
 
         {/* TABLE */}
         <div className="flex_column table1">
+
           {/* HEADER */}
           <div className="table1_header">
+
             <TableItem class="tableitem table1_item3" font="font_bold" text="Actions" />
             <TableItem class="tableitem table1_item1" font="font_bold" text="ID" />
             <TableItem class="tableitem table1_item1" font="font_bold" text="Image" />
-            <TableItem class="tableitem table1_item3" font="font_bold" text="Title" />
-            <TableItem class="tableitem table1_item1" font="font_bold" text="Location" />
+            <TableItem class="tableitem table1_item3" font="font_bold" text="Vendor" />
+            <TableItem class="tableitem table1_item3" font="font_bold" text="Category" />
+            <TableItem class="tableitem table1_item3" font="font_bold" text="Booth" />
             <TableItem class="tableitem table1_item4" font="font_bold" text="Description" />
-            <TableItem class="tableitem table1_item5" font="font_bold" text="Price" />
-            <TableItem class="tableitem table1_item5" font="font_bold" text="title_AR" />
-            <TableItem class="tableitem table1_item4" font="font_bold" text="Description AR" />
-            <TableItem class="tableitem table1_item6" font="font_bold" text="Last Updated" />
+            <TableItem class="tableitem table1_item5" font="font_bold" text="Phone" />
+            <TableItem class="tableitem table1_item5" font="font_bold" text="Email" />
+            <TableItem class="tableitem table1_item6" font="font_bold" text="Created At" />
+
           </div>
 
           {/* ROWS */}
-          {filteredEvents.length > 0 ? (
-            filteredEvents.map((i) => (
+          {filteredVendors.length > 0 ? (
+            filteredVendors.map((i) => (
+
               <div key={i.id} className="table1_header table_row1">
+
+                {/* ACTIONS */}
                 <div className="tableitem table1_item3">
+
                   <div className="tableitem_img">
-                    <button onClick={() => deleteEvent(i.id)} title="delete" className="btn5">
+
+                    <button
+                      onClick={() => deleteVendor(i.id)}
+                      title="delete"
+                      className="btn5"
+                    >
                       <img src={delete1} alt="" />
                     </button>
-                    <button onClick={() => openEdit(i)} title="edit" className="btn5">
+
+                    <button
+                      onClick={() => openEdit(i)}
+                      title="edit"
+                      className="btn5"
+                    >
                       <img src={edit} alt="" />
                     </button>
+
                   </div>
+
                 </div>
 
-                <TableItem class="tableitem table1_item1" font="font_light h5_2" text={i.id} />
+                {/* ID */}
+                <TableItem
+                  class="tableitem table1_item1"
+                  font="font_light h5_2"
+                  text={i.id}
+                />
 
+                {/* IMAGE */}
                 <div className="tableitem table1_item1">
+
                   <div className="tableitem_img">
-                    <img src={i.image} alt="" />
+                    <img src={i.profile_pic} alt="" />
                   </div>
+
                 </div>
 
-                <TableItem class="tableitem table1_item3" font="font_light" text={i.title} />
-                <TableItem class="tableitem table1_item1" font="font_light h5_2" text={i.location} />
-                <TableItem class="tableitem table1_item4" font="font_light h5_2" text={i.description} />
-                <TableItem class="tableitem table1_item5" font="font_light" text={`  ${i.price} EGP`} />
-                <TableItem class="tableitem table1_item5" font="font_light" text={i.title_Ar} />
-                <TableItem class="tableitem table1_item5" font="font_light" text={i.description_Ar} />
+                {/* NAME */}
+                <TableItem
+                  class="tableitem table1_item3"
+                  font="font_light"
+                  text={i.name}
+                />
 
+                {/* CATEGORY */}
+                <TableItem
+                  class="tableitem table1_item3"
+                  font="font_light"
+                  text={i.categories?.title}
+                />
+
+                {/* BOOTH */}
+                <TableItem
+                  class="tableitem table1_item3"
+                  font="font_light"
+                  text={i.booths?.booth_no}
+                />
+
+                {/* DESCRIPTION */}
+                <TableItem
+                  class="tableitem table1_item4"
+                  font="font_light h5_2"
+                  text={i.description}
+                />
+
+                {/* PHONE */}
+                <TableItem
+                  class="tableitem table1_item5"
+                  font="font_light"
+                  text={i.phone}
+                />
+
+                {/* EMAIL */}
+                <TableItem
+                  class="tableitem table1_item5"
+                  font="font_light"
+                  text={i.email}
+                />
+
+                {/* CREATED */}
                 <div className="tableitem table1_item6">
-                  <h5 className="font_light h5_2">{i.updated_at}</h5>
+                  <h5 className="font_light h5_2">
+                    {new Date(i.created_at).toLocaleDateString()}
+                  </h5>
                 </div>
+
               </div>
             ))
           ) : (
             <div className="table1_header">
               <h5 className="font_light h5_2">
-                No events found.
+                No vendors found.
               </h5>
             </div>
           )}
+
         </div>
 
         {/* CREATE POPUP */}
         <div className={`popUp ${isOpen ? "show" : "hide"}`}>
+
           <div className="bg div">
+
             <form className="form1" onSubmit={handleSubmit}>
-              <button type="button" className="btn3 closed" onClick={closePopup}>
+
+              <button
+                type="button"
+                className="btn3 closed"
+                onClick={closePopup}
+              >
                 <img src={close1} alt="" />
               </button>
-              <Heading heading="Create Event" />
+
+              <Heading heading="Create Vendor" />
 
               <div className="chipsFlex">
-                <input type="text" placeholder="Event Title" value={eventTitle} onChange={(e) => setEventTitle(e.target.value)} />
-                <input type="text" placeholder="Arabic Title" value={titleAr} onChange={(e) => setTitleAr(e.target.value)} />
+                <input type="text" placeholder="Vendor Name" value={name} onChange={(e) => setName(e.target.value)} />
+                <input type="text" placeholder="Profile Image URL" value={profilePic} onChange={(e) => setProfilePic(e.target.value)} />
               </div>
 
               <div className="chipsFlex">
-                <input type="text" placeholder="Location" value={location} onChange={(e) => setLocation(e.target.value)} />
-                <input type="text" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
+                <input type="text" placeholder="Phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
               </div>
 
               <div className="chipsFlex">
-                <input type="number" placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} />
-                <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+                <input type="text" placeholder="Instagram" value={instagram} onChange={(e) => setInstagram(e.target.value)} />
+                <input type="text" placeholder="Facebook" value={facebook} onChange={(e) => setFacebook(e.target.value)} />
               </div>
 
-              <div className="chipsFlex">
-                <input type="time" value={time} onChange={(e) => setTime(e.target.value)} />
-                <input type="text" placeholder="Image URL" value={image} onChange={(e) => setImage(e.target.value)} />
-              </div>
-              <select className="selection" value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
+              <textarea
+                placeholder="Description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+
+              {/* CATEGORY */}
+              <select
+                className="selection"
+                value={categoryId}
+                onChange={(e) => setCategoryId(e.target.value)}
+              >
+
                 <option value="">Select Category</option>
+
                 {categories.map((c) => (
-                  <option key={c.id} value={c.id}>{c.title}</option>
+                  <option key={c.id} value={c.id}>
+                    {c.title}
+                  </option>
                 ))}
+
               </select>
 
-              <button type="submit" className="btn1 btn4">Create Event</button>
+              {/* BOOTH */}
+              <select
+                className="selection"
+                value={boothId}
+                onChange={(e) => setBoothId(e.target.value)}
+              >
+
+                <option value="">Select Booth</option>
+
+                {booths.map((b) => (
+                  <option key={b.id} value={b.id}>
+                    {b.booth_no}
+                  </option>
+                ))}
+
+              </select>
+
+              {/* PRODUCT */}
+              <select
+                className="selection"
+                value={productId}
+                onChange={(e) => setProductId(e.target.value)}
+              >
+
+                <option value="">Select Product</option>
+
+                {products.map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {p.title}
+                  </option>
+                ))}
+
+              </select>
+
+              <button type="submit" className="btn1 btn4">
+                Create Vendor
+              </button>
+
             </form>
+
           </div>
         </div>
 
         {/* EDIT POPUP */}
         <div className={`popUp ${isEditOpen ? "show" : "hide"}`}>
+
           <div className="bg div">
+
             <form className="form1" onSubmit={handleUpdate}>
-              <button type="button" className="btn3 closed" onClick={closeEdit}>
+
+              <button
+                type="button"
+                className="btn3 closed"
+                onClick={closeEdit}
+              >
                 <img src={close1} alt="" />
               </button>
-              <Heading heading="Edit Event" />
+
+              <Heading heading="Edit Vendor" />
 
               <div className="chipsFlex">
-                <input type="text" placeholder="Event Title" value={editTitle} onChange={(e) => setEditTitle(e.target.value)} />
-                <input type="text" placeholder="Arabic Title" value={editTitleAr} onChange={(e) => setEditTitleAr(e.target.value)} />
+                <input type="text" placeholder="Vendor Name" value={editName} onChange={(e) => setEditName(e.target.value)} />
+                <input type="text" placeholder="Profile Image URL" value={editProfilePic} onChange={(e) => setEditProfilePic(e.target.value)} />
               </div>
 
               <div className="chipsFlex">
-                <input type="text" placeholder="Location" value={editLocation} onChange={(e) => setEditLocation(e.target.value)} />
-                <input type="text" placeholder="Description" value={editDescription} onChange={(e) => setEditDescription(e.target.value)} />
+                <input type="text" placeholder="Phone" value={editPhone} onChange={(e) => setEditPhone(e.target.value)} />
+                <input type="email" placeholder="Email" value={editEmail} onChange={(e) => setEditEmail(e.target.value)} />
               </div>
 
               <div className="chipsFlex">
-                <input type="number" placeholder="Price" value={editPrice} onChange={(e) => setEditPrice(e.target.value)} />
-                <input type="date" value={editDate} onChange={(e) => setEditDate(e.target.value)} />
+                <input type="text" placeholder="Instagram" value={editInstagram} onChange={(e) => setEditInstagram(e.target.value)} />
+                <input type="text" placeholder="Facebook" value={editFacebook} onChange={(e) => setEditFacebook(e.target.value)} />
               </div>
 
-              <div className="chipsFlex">
-                <input type="time" value={editTime} onChange={(e) => setEditTime(e.target.value)} />
-                <input type="text" placeholder="Image URL" value={editImage} onChange={(e) => setEditImage(e.target.value)} />
-              </div>
+              <textarea
+                placeholder="Description"
+                value={editDescription}
+                onChange={(e) => setEditDescription(e.target.value)}
+              />
 
-              <select className="selection" value={editCategoryId} onChange={(e) => setEditCategoryId(e.target.value)}>
+              {/* CATEGORY */}
+              <select
+                className="selection"
+                value={editCategoryId}
+                onChange={(e) => setEditCategoryId(e.target.value)}
+              >
+
                 <option value="">Select Category</option>
+
                 {categories.map((c) => (
-                  <option key={c.id} value={c.id}>{c.title}</option>
+                  <option key={c.id} value={c.id}>
+                    {c.title}
+                  </option>
                 ))}
+
               </select>
 
-              <button type="submit" className="btn1 btn4">Save Changes</button>
+              {/* BOOTH */}
+              <select
+                className="selection"
+                value={editBoothId}
+                onChange={(e) => setEditBoothId(e.target.value)}
+              >
+
+                <option value="">Select Booth</option>
+
+                {booths.map((b) => (
+                  <option key={b.id} value={b.id}>
+                    {b.booth_no}
+                  </option>
+                ))}
+
+              </select>
+
+              {/* PRODUCT */}
+              <select
+                className="selection"
+                value={editProductId}
+                onChange={(e) => setEditProductId(e.target.value)}
+              >
+
+                <option value="">Select Product</option>
+
+                {products.map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {p.title}
+                  </option>
+                ))}
+
+              </select>
+
+              <button type="submit" className="btn1 btn4">
+                Save Changes
+              </button>
+
             </form>
+
           </div>
         </div>
 
