@@ -144,12 +144,13 @@ const Table7 = () => {
 
           {/* TABLE HEADER */}
           <div className="table1_header" role="row">
-            <TableItem class="tableitem table1_item3" font="font_bold" text="Actions"    role="columnheader" />
             <TableItem class="tableitem table1_item1" font="font_bold" text="ID"         role="columnheader" />
             <TableItem class="tableitem table1_item1" font="font_bold" text="Icon"       role="columnheader" />
             <TableItem class="tableitem table1_item3" font="font_bold" text="Question"   role="columnheader" />
             <TableItem class="tableitem table1_item3" font="font_bold" text="Answer"     role="columnheader" />
             <TableItem class="tableitem table1_item6" font="font_bold" text="Created At" role="columnheader" />
+            <TableItem class="tableitem table1_item1" font="font_bold" text="Actions"    role="columnheader" />
+
           </div>
 
           {/* TABLE ROWS */}
@@ -162,25 +163,7 @@ const Table7 = () => {
                 tabIndex={0}
                 aria-label={`FAQ: ${i.question}`}
               >
-                {/* ACTIONS */}
-                <div className="tableitem table1_item3" role="cell">
-                  <div className="tableitem_img">
-                    <button
-                      onClick={() => deleteFaq(i.id)}
-                      className="btn5"
-                      aria-label="Delete"
-                    >
-                      <img src={delete1} alt="" aria-hidden="true" />
-                    </button>
-                    <button
-                      onClick={() => openEdit(i)}
-                      className="btn5"
-                      aria-label="Edit"
-                    >
-                      <img src={edit} alt="" aria-hidden="true" />
-                    </button>
-                  </div>
-                </div>
+              
 
                 {/* ID */}
                 <TableItem class="tableitem table1_item1" font="font_light h5_2" text={i.id} role="cell" />
@@ -203,6 +186,26 @@ const Table7 = () => {
                   <h5 className="font_light h5_2">
                     {new Date(i.created_at).toLocaleDateString()}
                   </h5>
+                </div>
+
+                  {/* ACTIONS */}
+                <div className="tableitem table1_item1" role="cell">
+                  <div className="tableitem_img">
+                    <button
+                      onClick={() => deleteFaq(i.id)}
+                      className="btn5"
+                      aria-label="Delete"
+                    >
+                      <img src={delete1} alt="" aria-hidden="true" />
+                    </button>
+                    <button
+                      onClick={() => openEdit(i)}
+                      className="btn5"
+                      aria-label="Edit"
+                    >
+                      <img src={edit} alt="" aria-hidden="true" />
+                    </button>
+                  </div>
                 </div>
 
               </div>

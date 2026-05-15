@@ -142,18 +142,29 @@ const Table5 = () => {
         <div className="flex_column table1">
           {/* HEADER ROW */}
           <div className="table1_header">
-            <TableItem class="tableitem table1_item3" font="font_bold" text="Actions" />
             <TableItem class="tableitem table1_item1" font="font_bold" text="ID" />
             <TableItem class="tableitem table1_item3" font="font_bold" text="Name" />
             <TableItem class="tableitem table1_item4" font="font_bold" text="Link" />
             <TableItem class="tableitem table1_item6" font="font_bold" text="Created At" />
+            <TableItem class="tableitem table1_item1" font="font_bold" text="Actions" />
+
           </div>
 
           {/* ROWS */}
           {filteredNavItems.length > 0 ? (
             filteredNavItems.map((i) => (
               <div key={i.id} className="table1_header table_row1">
-                <div className="tableitem table1_item3">
+               
+
+                <TableItem class="tableitem table1_item1" font="font_light h5_2" text={i.id} />
+                <TableItem class="tableitem table1_item3" font="font_light" text={i.name} />
+                <TableItem class="tableitem table1_item4" font="font_light h5_2" text={i.link} />
+
+                <div className="tableitem table1_item6">
+                  <h5 className="font_light h5_2">{i.created_at}</h5>
+                </div>
+                {/* ACTIONS */}
+                 <div className="tableitem table1_item1">
                   <div className="tableitem_img">
                     <button onClick={() => deleteNavItem(i.id)} title="delete" className="btn5">
                       <img src={delete1} alt="" />
@@ -162,14 +173,6 @@ const Table5 = () => {
                       <img src={edit} alt="" />
                     </button>
                   </div>
-                </div>
-
-                <TableItem class="tableitem table1_item1" font="font_light h5_2" text={i.id} />
-                <TableItem class="tableitem table1_item3" font="font_light" text={i.name} />
-                <TableItem class="tableitem table1_item4" font="font_light h5_2" text={i.link} />
-
-                <div className="tableitem table1_item6">
-                  <h5 className="font_light h5_2">{i.created_at}</h5>
                 </div>
               </div>
             ))

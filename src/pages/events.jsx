@@ -2,12 +2,10 @@ import React from 'react';
 import Aside from '../components/layout/aside';
 import Navbar from '../components/layout/header';
 import TitleBlock from '../components/common/title';
-// import Button from '../components/common/button';
-// import arrow2 from './../assets/tiltedarrow.svg'
 
 
 import Footer from '../components/layout/footer';
-import Table1 from '../components/sections/table1';
+import Table9 from '../components/sections/table9';
 const Events = () => {
 
 
@@ -21,13 +19,10 @@ const Events = () => {
             </div>
              <TitleBlock
                 class="title1"
-                heading="Events Management"
-                subheading="Manage and edit all events on Ma7gouz"
+                heading="Event Details Management"
+                subheading="Manage and edit all of the EgyCraft Exhibition Details"
                 />
-                
-                <Table1 />
-
-
+                 <Table9 />
            </section>
         <Footer />
         </main>

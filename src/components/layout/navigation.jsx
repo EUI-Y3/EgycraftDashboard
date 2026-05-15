@@ -23,7 +23,7 @@ const Navigations = () => {
             <Navitem icon={icon3} title="Event"       link="/events"    style1="asideNav" index={4} />
             <Navitem icon={icon7} title="Categories"  link="/categories" style1="asideNav" index={5} />
             <Navitem icon={icon4} title="Tickets"     link="/tickets"   style1="asideNav" index={6} />
-            <Navitem icon={icon6} title="Vendors"     link="/feedback"  style1="asideNav" index={7} />
+            <Navitem icon={icon6} title="Vendors"     link="/vendors"  style1="asideNav" index={7} />
     
     </> );
 }

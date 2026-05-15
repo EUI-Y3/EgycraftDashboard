@@ -72,13 +72,14 @@ const Table2 = () => {
 
           {/* HEADER */}
           <div className="table1_header">
-            <TableItem class="tableitem table1_item3" font="font_bold" text="Actions" />
             <TableItem class="tableitem table1_item1" font="font_bold" text="ID" />
             <TableItem class="tableitem table1_item1" font="font_bold" text="No of Tickets" />
             <TableItem class="tableitem table1_item1" font="font_bold" text="Phone" />
             <TableItem class="tableitem table1_item3" font="font_bold" text="Email" />
             <TableItem class="tableitem table1_item3" font="font_bold" text="Day" />
             <TableItem class="tableitem table1_item6" font="font_bold" text="Booked At" />
+            <TableItem class="tableitem table1_item1" font="font_bold" text="Actions" />
+
           </div>
 
           {/* ROWS */}
@@ -86,14 +87,6 @@ const Table2 = () => {
             filteredBookings.map((i) => (
               <div key={i.id} className="table1_header table_row1">
 
-                {/* ACTIONS */}
-                <div className="tableitem table1_item3">
-                  <div className="tableitem_img">
-                    <button onClick={() => deleteBooking(i.id)} className="btn5">
-                      <img src={delete1} alt="delete" />
-                    </button>
-                  </div>
-                </div>
 
                 {/* ID */}
                 <TableItem class="tableitem table1_item1" font="font_light h5_2" text={i.id} />
@@ -112,6 +105,15 @@ const Table2 = () => {
                 {/* CREATED AT */}
                 <div className="tableitem table1_item6">
                   <h5 className="font_light h5_2">{i.created_at}</h5>
+                </div>
+
+                {/* ACTIONS */}
+                <div className="tableitem table1_item1">
+                  <div className="tableitem_img">
+                    <button onClick={() => deleteBooking(i.id)} className="btn5">
+                      <img src={delete1} alt="delete" />
+                    </button>
+                  </div>
                 </div>
 
               </div>

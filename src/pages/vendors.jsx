@@ -6,7 +6,7 @@ import TitleBlock from '../components/common/title';
 
 import Footer from '../components/layout/footer';
 // import Table5 from '../components/sections/table5';
-import Table6 from '../components/sections/table6';
+import Table1 from '../components/sections/table1';
 
 const Vendors = () => {
     return ( <>
@@ -22,8 +22,7 @@ const Vendors = () => {
                 heading="Vendors Management"
                 subheading="Manage and edit all Vendors in EgyCraft Exhibition"
                 />
-                
-                <Table6 />
+                <Table1 />
 
 
            </section>

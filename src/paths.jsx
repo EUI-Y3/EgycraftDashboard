@@ -7,9 +7,9 @@ import Events from './pages/events';
 import Tickets from './pages/tickets';
 import Categories from './pages/categories';
 import ContentManagement from './pages/contentmanagement';
-import Feedback from './pages/feedback';
+import Feedback from './pages/vendors';
 import Error from './pages/error';
-import Vendors from './pages/feedback';
+import Vendors from './pages/vendors';
 
 function Paths() {
     return (

@@ -301,7 +301,6 @@ const Table1 = () => {
           {/* HEADER */}
           <div className="table1_header">
 
-            <TableItem class="tableitem table1_item3" font="font_bold" text="Actions" />
             <TableItem class="tableitem table1_item1" font="font_bold" text="ID" />
             <TableItem class="tableitem table1_item1" font="font_bold" text="Image" />
             <TableItem class="tableitem table1_item3" font="font_bold" text="Vendor" />
@@ -311,6 +310,7 @@ const Table1 = () => {
             <TableItem class="tableitem table1_item5" font="font_bold" text="Phone" />
             <TableItem class="tableitem table1_item5" font="font_bold" text="Email" />
             <TableItem class="tableitem table1_item6" font="font_bold" text="Created At" />
+            <TableItem class="tableitem table1_item3" font="font_bold" text="Actions" />
 
           </div>
 
@@ -319,31 +319,6 @@ const Table1 = () => {
             filteredVendors.map((i) => (
 
               <div key={i.id} className="table1_header table_row1">
-
-                {/* ACTIONS */}
-                <div className="tableitem table1_item3">
-
-                  <div className="tableitem_img">
-
-                    <button
-                      onClick={() => deleteVendor(i.id)}
-                      title="delete"
-                      className="btn5"
-                    >
-                      <img src={delete1} alt="" />
-                    </button>
-
-                    <button
-                      onClick={() => openEdit(i)}
-                      title="edit"
-                      className="btn5"
-                    >
-                      <img src={edit} alt="" />
-                    </button>
-
-                  </div>
-
-                </div>
 
                 {/* ID */}
                 <TableItem
@@ -410,6 +385,31 @@ const Table1 = () => {
                   </h5>
                 </div>
 
+{/* ACTIONS */}
+                <div className="tableitem table1_item3">
+
+                  <div className="tableitem_img">
+
+                    <button
+                      onClick={() => deleteVendor(i.id)}
+                      title="delete"
+                      className="btn5"
+                    >
+                      <img src={delete1} alt="" />
+                    </button>
+
+                    <button
+                      onClick={() => openEdit(i)}
+                      title="edit"
+                      className="btn5"
+                    >
+                      <img src={edit} alt="" />
+                    </button>
+
+                  </div>
+
+                </div>
+
               </div>
             ))
           ) : (
@@ -439,17 +439,17 @@ const Table1 = () => {
 
               <Heading heading="Create Vendor" />
 
-              <div className="chipsFlex">
+              <div className="inputFlex">
                 <input type="text" placeholder="Vendor Name" value={name} onChange={(e) => setName(e.target.value)} />
                 <input type="text" placeholder="Profile Image URL" value={profilePic} onChange={(e) => setProfilePic(e.target.value)} />
               </div>
 
-              <div className="chipsFlex">
+              <div className="inputFlex">
                 <input type="text" placeholder="Phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
                 <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
               </div>
 
-              <div className="chipsFlex">
+              <div className="inputFlex">
                 <input type="text" placeholder="Instagram" value={instagram} onChange={(e) => setInstagram(e.target.value)} />
                 <input type="text" placeholder="Facebook" value={facebook} onChange={(e) => setFacebook(e.target.value)} />
               </div>
@@ -460,7 +460,8 @@ const Table1 = () => {
                 onChange={(e) => setDescription(e.target.value)}
               />
 
-              {/* CATEGORY */}
+            <div className="inputFlex">
+                {/* CATEGORY */}
               <select
                 className="selection"
                 value={categoryId}
@@ -474,7 +475,6 @@ const Table1 = () => {
                     {c.title}
                   </option>
                 ))}
-
               </select>
 
               {/* BOOTH */}
@@ -494,6 +494,7 @@ const Table1 = () => {
 
               </select>
 
+            </div>
               {/* PRODUCT */}
               <select
                 className="selection"
@@ -505,7 +506,7 @@ const Table1 = () => {
 
                 {products.map((p) => (
                   <option key={p.id} value={p.id}>
-                    {p.title}
+                    {p.name}
                   </option>
                 ))}
 
@@ -537,17 +538,17 @@ const Table1 = () => {
 
               <Heading heading="Edit Vendor" />
 
-              <div className="chipsFlex">
+              <div className="inputFlex">
                 <input type="text" placeholder="Vendor Name" value={editName} onChange={(e) => setEditName(e.target.value)} />
                 <input type="text" placeholder="Profile Image URL" value={editProfilePic} onChange={(e) => setEditProfilePic(e.target.value)} />
               </div>
 
-              <div className="chipsFlex">
+              <div className="inputFlex">
                 <input type="text" placeholder="Phone" value={editPhone} onChange={(e) => setEditPhone(e.target.value)} />
                 <input type="email" placeholder="Email" value={editEmail} onChange={(e) => setEditEmail(e.target.value)} />
               </div>
 
-              <div className="chipsFlex">
+              <div className="inputFlex">
                 <input type="text" placeholder="Instagram" value={editInstagram} onChange={(e) => setEditInstagram(e.target.value)} />
                 <input type="text" placeholder="Facebook" value={editFacebook} onChange={(e) => setEditFacebook(e.target.value)} />
               </div>
@@ -558,7 +559,8 @@ const Table1 = () => {
                 onChange={(e) => setEditDescription(e.target.value)}
               />
 
-              {/* CATEGORY */}
+              <div className="inputFlex">
+                {/* CATEGORY */}
               <select
                 className="selection"
                 value={editCategoryId}
@@ -591,6 +593,7 @@ const Table1 = () => {
                 ))}
 
               </select>
+              </div>
 
               {/* PRODUCT */}
               <select
@@ -602,8 +605,8 @@ const Table1 = () => {
                 <option value="">Select Product</option>
 
                 {products.map((p) => (
-                  <option key={p.id} value={p.id}>
-                    {p.title}
+                  <option className="black" key={p.id} value={p.id}>
+                    {p.name}
                   </option>
                 ))}
 

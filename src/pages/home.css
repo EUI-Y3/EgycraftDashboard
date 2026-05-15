@@ -113,7 +113,7 @@ flex-wrap: wrap;
 }
 .form1, .form3{
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     border-radius: 16px;
     position: relative;
         border: 6px solid #0b7f7b;
@@ -161,16 +161,18 @@ flex-wrap: wrap;
     flex-direction: column;
 }
 .imgbg{
-    background-image: url(./../assets/wireframe.svg);
+    background-image: url(./../assets/LOGINBG.png);
     background-attachment: fixed;
     width: 100vw;
+    background-size: 50%;
+    background-repeat: repeat;
     height: 100vh;
 }
 .form3 input{
     width: 100%;
 }
 input:active{
-border: 1.4px solid #E2209E;
+border: 1.4px solid #0b7f7b;
 }
 .mainCont{
     display: flex;

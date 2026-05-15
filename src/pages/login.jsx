@@ -33,7 +33,7 @@ const Login = () => {
                                 img={logo1}
                                 class="title1"
                                 heading="Admin Login"
-                                subheading="Log in to your official account on Ma7gouz."
+                                subheading="Log in to your official account on EgyCraft"
                             />
 
                             <input

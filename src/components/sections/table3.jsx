@@ -140,7 +140,7 @@ const Table3 = () => {
 
         {/* TABLE */}
         <div className="flex_column table1">
-          <div className="table1_header">
+          <div style={{ border: "none" }} className="table1_header">
             <h5>All Sections ({sections.length})</h5>
           </div>
 

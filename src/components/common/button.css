@@ -26,9 +26,15 @@ button:hover{
 .btn1{
     border-radius: 12px;
     background-image: url(./../../assets/btn1before1.png);
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 .btn1:hover{
     background-image: url(./../../assets/btn1before2.png);
+     background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 .btn2{
     border-radius: 12px;
