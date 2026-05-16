@@ -6,6 +6,7 @@ import Footer from '../components/layout/footer';
 import Table5 from '../components/sections/table5';
 import Table3 from '../components/sections/table3';
 import Table7 from '../components/sections/table7';
+import Preloader from '../components/layout/preloader';
 
 const ContentManagement = () => {
 
@@ -38,13 +39,13 @@ const ContentManagement = () => {
 
     }, []);
     return ( <>
+        <Preloader />
+
     <div className='body2'>
     <Aside />
         <main id='main-content' className='main2'>
             <Navbar />
-           <section className='mainCont'>
-            <div className="tableFlex">
-            </div>
+           <section style={{ "margin" : "40px 0 0 0 "}} className='mainCont'>
              <TitleBlock
                 class="title1"
                 heading="Content Management"

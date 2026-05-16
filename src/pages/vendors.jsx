@@ -5,18 +5,18 @@ import TitleBlock from '../components/common/title';
 
 
 import Footer from '../components/layout/footer';
-// import Table5 from '../components/sections/table5';
 import Table1 from '../components/sections/table1';
+import Preloader from '../components/layout/preloader';
 
 const Vendors = () => {
     return ( <>
+        <Preloader />
+
     <div className='body2'>
     <Aside />
         <main id='main-content' className='main2'>
             <Navbar />
            <section className='mainCont'>
-            <div className="tableFlex">
-            </div>
              <TitleBlock
                 class="title1"
                 heading="Vendors Management"

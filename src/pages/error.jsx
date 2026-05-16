@@ -2,10 +2,8 @@ import React from 'react';
 import errormsg from './../assets/fillerIllus02.svg'
 import decor from './../assets/pagedecor.svg'
 import './error.css'
-import HeadingBlock from '../components/common/heading';
 import BlinkingEye from '../components/common/blinkingEye';
 import Button from '../components/common/button';
-import Header from '../components/layout/header';
 import './error.css'
 import TitleBlock from '../components/common/title';
 const Error = () => {

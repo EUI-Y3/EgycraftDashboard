@@ -165,7 +165,7 @@ const Table9 = () => {
 
   return (
     <>
-      <div className="container_3 table_container">
+      <div id="EventDetails" data-section className="container_3 table_container">
 
         {/* HEADER */}
         <div className="heading_buttonflex1">

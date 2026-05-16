@@ -50,7 +50,7 @@ export function TicketRevenueChart() {
 
               <Tooltip
                 contentStyle={{
-                  backgroundColor: "#1e1e1e",
+                  backgroundColor: "#b09898",
                   border: "1px solid #fa5e61",
                   borderRadius: "8px",
                   color: "#fff",
@@ -134,7 +134,7 @@ export function UserGrowthChart() {
                 />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: "#1e1e1e",
+                    backgroundColor: "#b09898",
                     border: "1px solid #fa5e61",
                     borderRadius: "8px",
                     color: "#fff",

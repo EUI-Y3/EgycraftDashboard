@@ -8,15 +8,16 @@ import TitleBlock from '../components/common/title';
 
 import Footer from '../components/layout/footer';
 import Table2 from '../components/sections/table2';
+import Preloader from '../components/layout/preloader';
 const Tickets = () => {
     return ( <>
+        <Preloader />
+
     <div className='body2'>
     <Aside />
         <main id='main-content' className='main2'>
             <Navbar />
            <section className='mainCont'>
-            <div className="tableFlex">
-            </div>
              <TitleBlock
                 class="title1"
                 heading="Tickets & Bookings"

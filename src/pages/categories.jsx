@@ -8,15 +8,16 @@ import TitleBlock from '../components/common/title';
 
 import Footer from '../components/layout/footer';
 import Table4 from '../components/sections/table4';
+import Preloader from '../components/layout/preloader';
 const Categories = () => {
     return ( <>
+        <Preloader />
+
    <div className='body2'>
     <Aside />
         <main className='main2'>
             <Navbar />
            <section className='mainCont'>
-            <div className="tableFlex">
-            </div>
              <TitleBlock
                 class="title1"
                 heading="Categories Management"

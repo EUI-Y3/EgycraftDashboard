@@ -11,7 +11,7 @@ import Footer from '../components/layout/footer';
 import StatCard from '../components/common/statcard';
 import { TicketRevenueChart, UserGrowthChart } from '../components/layout/chart1';
 import { supabase } from './../supabase';
-
+import Preloader from '../components/layout/preloader';
 const Home = () => {
     const [vendorCount, setVendorCount] = useState(null);
     const [ticketCount, setTicketCount] = useState(null);
@@ -39,6 +39,7 @@ const Home = () => {
 
     return (
         <>
+        <Preloader />
             <div className='body2'>
                 <Aside />
                 <Navbar />
@@ -55,22 +56,18 @@ const Home = () => {
                                 <h3>Total Vendors</h3>
                                 <Button img={arrow2} class="btn1 btn3" cta="view website" />
                                 <h1>{vendorCount ?? '...'}</h1>
-                                <h4 className='statText'>
-                                    24% increase from last month
-                                </h4>
                             </div>
                             <div className="btnFlex">
                                 <StatCard
                                     icon={icon2}
                                     title="Total Tickets"
                                     number={ticketCount ?? '...'}
-                                    extra="15% increase from last month"
+                                    extra="15% increase from last week"
                                 />
                                 <StatCard
                                     icon={icon3}
                                     title="Total Booths"
                                     number={boothCount ?? '...'}
-                                    extra="15% increase from last month"
                                 />
                             </div>
                         </div>
